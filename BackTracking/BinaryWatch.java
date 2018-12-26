@@ -47,6 +47,7 @@ class Solution1 {
         for(int h=0; h<12; h++) {
             for(int m=0; m<60; m++) {
                 if((Integer.bitCount(h) + Integer.bitCount(m)) == num) {
+               //or h<<6 + m  or  h*64 + m (since 2^6=64, thus h*64 == h<<6)
                     times.add(String.format("%d:%02d",h,m));
                 }
             }

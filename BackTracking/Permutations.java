@@ -57,3 +57,31 @@ public class Solution {
         }
     }
 }
+
+/*
+求全组合的backtracking模板：
+
+//list s是已取出的数，nums是原始数组，pos是当前取第几个位置的数
+public void helper(List<Integer> s,int[] nums,int pos){
+        //跳出条件
+        if(……){
+            ……
+            return;
+        }
+        //遍历池子中的数
+        for(int i=0;i<nums.length;i++){
+            int num = nums[i];
+            //取过的数不再取    
+            if(s.contains(num)){
+                continue;
+            }
+            //取出一个数
+            s.add(num);
+            //进行下一个位置的取数，pos+1
+            helper(s,nums,pos+1);
+            //重要！！遍历过此节点后，要回溯到上一步，因此要把加入到结果中的此点去除掉！
+            s.remove(s.size()-1);
+        }
+    }
+}
+*/

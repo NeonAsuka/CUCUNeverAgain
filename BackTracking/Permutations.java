@@ -46,6 +46,7 @@ public class Solution {
             return;
         }
         
+        //nums[] 中有所有可取的数，为现在这一位(position)尝试所有可能的值
         for(int i=0; i<nums.length; i++) {
             int num = nums[i];
             if(s.contains(num)) continue;

@@ -35,7 +35,7 @@ A:
 逆向思考的话，我们直接go through所有可能的小时和分钟的数字(而不是为1的二进制位数)，进而构成一个完整的时间。判断此时间转换为二进制时1的
 位数是否等于num,如果是，即是我们想要的结果。
 
-Time: n^2
+Time: 1
 Space: 1
 
 但是，这种方法与backtracking无关。
@@ -57,6 +57,45 @@ class Solution1 {
 }
 
 /*
-2.
+2. 在获得hour为1的位数后，则m为1位数为num-h，然后用递归DFS遍历所有可能的情况。
+
+Time: 至少为NlogN+N^2
+Space: N?
 
 */
+
+public class Solution {
+    public List<String> readBinaryWatch(int num) {
+        List<String> res = new ArrayList<>();
+        int[] nums1 = new int[]{8, 4, 2, 1}, nums2 = new int[]{32, 16, 8, 4, 2, 1};
+        for(int i = 0; i <= num; i++) {
+            List<Integer> list1 = generateDigit(nums1, i);
+            List<Integer> list2 = generateDigit(nums2, num - i);
+            for(int num1: list1) {
+                if(num1 >= 12) continue;
+                for(int num2: list2) {
+                    if(num2 >= 60) continue;
+                    res.add(num1 + ":" + (num2 < 10 ? "0" + num2 : num2));
+                }
+            }
+        }
+        return res;
+    }
+
+    private List<Integer> generateDigit(int[] nums, int count) {
+        List<Integer> res = new ArrayList<>();
+        generateDigitHelper(nums, count, 0, 0, res);
+        return res;
+    }
+
+    private void generateDigitHelper(int[] nums, int count, int pos, int sum, List<Integer> res) {
+        if(count == 0) {
+            res.add(sum);
+            return;
+        }
+        
+        for(int i = pos; i < nums.length; i++) {
+            generateDigitHelper(nums, count - 1, i + 1, sum + nums[i], res);    
+        }
+    }
+}

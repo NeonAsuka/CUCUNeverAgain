@@ -29,25 +29,28 @@ A:
 
 */
 
-public class Solution {
+class Solution {
     List<List<Integer>> res = new ArrayList<>();
     
     public List<List<Integer>> subsets(int[] nums) {
+        if(nums==null) return res;
         List<Integer> item = new ArrayList<>();
+      //此时需要进行排序，因为[1,3]和[3,1]是一样的，需要通过排序避免重复(同时后续遍历需要一直向右走不能回头,所以设置position避免回头路)
         Arrays.sort(nums);
-        helper(item, nums, 0, 0);
-        return res;  
+        dfs(item, nums, 0);
+        return res;
     }
     
-    private void helper(List<Integer> s, int[] nums, int nowPosition, int indexPosition) {
-        res.add(new ArrayList<Integer>(s));
-        if(nowPosition == nums.length) return;
-        
-        for(int i=indexPosition; i<nums.length; i++) {
-            if(s.contains(nums[i])) continue;
-            s.add(nums[i]);
-            helper(s, nums, nowPosition+1, i);
-            s.remove(s.size()-1);
+  //position或者i记录现在遍历到的nums数组中的位置，后续值只能取此为右边的值(比此值大的值)，以避免重复
+    private void dfs(List<Integer> item, int[] nums, int position) {
+        res.add(new ArrayList<Integer>(item));
+        for(int i=position; i<nums.length; i++) {
+            int num = nums[i];
+            if(item.contains(num)) continue;
+            item.add(num);
+          //设定后续的position必须不小于i(在i右边)
+            dfs(item, nums, i);
+            item.remove(item.size()-1);
         }
     }
 }

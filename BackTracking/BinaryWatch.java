@@ -99,3 +99,47 @@ public class Solution {
         }
     }
 }
+
+
+
+
+class Solution {
+    List<String> res = new ArrayList<>();
+ 
+    int[] hours = new int[]{8, 4, 2, 1};
+    int[] minutes = new int[]{32, 16, 8, 4, 2, 1};
+    List<Integer> itemH = new ArrayList<>();
+    List<Integer> itemM = new ArrayList<>();
+    
+    public List<String> readBinaryWatch(int num) {
+        for(int i = 0; i <= num; i++) {
+            dfs(i, 0, 0, hours, itemH);
+            dfs(num-i, 0, 0, minutes, itemM);
+            
+            for(int item1: itemH) {
+                if(item1>=12) continue;
+                for(int item2: itemM) {
+                    if(item2>=60) continue;
+                    res.add(String.format("%d:%02d", item1, item2));
+                }
+            }
+            itemH = new ArrayList<>();
+            itemM = new ArrayList<>();
+        }
+        return res;
+        
+        
+    }
+    
+    private void dfs(int count, int sum, int position, int[] array, List<Integer> item) {
+        if(count == 0) {
+            item.add(sum);
+            return;
+        }
+        for(int i=position; i<array.length; i++) {
+            sum += array[i];
+            dfs(count-1, sum, i+1, array, item);
+            sum -= array[i];
+        }
+    } 
+}

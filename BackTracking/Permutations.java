@@ -29,34 +29,35 @@ DFS+Recursive: 典型的backtracking问题
 更多请参考：https://blog.csdn.net/crystal6918/article/details/51924665
 */
 
-public class Solution {
-    List<List<Integer>> res = new ArrayList<List<Integer>>();
-    
+class Solution {
+    List<List<Integer>> res = new ArrayList<>();
     
     public List<List<Integer>> permute(int[] nums) {
         if(nums == null) return res;
-        List<Integer> select = new ArrayList<Integer>();
-        helper(select, nums, 0);
+        List<Integer> item = new ArrayList<>();
+        dfs(item, nums, 0);
         return res;
     }
     
-    private void helper(List<Integer> s, int[] nums, int position){
+    private void dfs(List<Integer> item, int[] nums, int position) {
         if(position == nums.length) {
-            res.add(new ArrayList<Integer>(s));
+            res.add(new ArrayList<Integer>(item));
             return;
         }
-        
         //nums[] 中有所有可取的数，为现在这一位(position)尝试所有可能的值
-        for(int i=0; i<nums.length; i++) {
-            int num = nums[i];
-            if(s.contains(num)) continue;
-            s.add(num);
-            helper(s, nums, position+1);
+        for(int num:nums) {
+            //这一步判断结果中是否有重复元素，也可以事先Arrays.sort(nums),但排序可能会增加额外的时间复杂度nlogn
+            if(item.contains(num)) continue;
+            item.add(num);
+            dfs(item, nums, position+1);
             //回溯回上一步，移除新近加入的节点，以便于继续测试其他同层节点
-            s.remove(s.size()-1);
+            item.remove(item.size()-1);
         }
     }
 }
+
+
+
 
 /*
 求全组合的backtracking模板：
@@ -69,12 +70,9 @@ public void helper(List<Integer> s,int[] nums,int pos){
             return;
         }
         //遍历池子中的数
-        for(int i=0;i<nums.length;i++){
-            int num = nums[i];
+        for(int num:nums){
             //取过的数不再取    
-            if(s.contains(num)){
-                continue;
-            }
+            if(s.contains(num)) continue;
             //取出一个数
             s.add(num);
             //进行下一个位置的取数，pos+1

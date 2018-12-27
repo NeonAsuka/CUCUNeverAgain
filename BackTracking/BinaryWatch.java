@@ -102,7 +102,7 @@ public class Solution {
 
 
 
-
+#我的解法
 class Solution {
     List<String> res = new ArrayList<>();
  
@@ -112,10 +112,12 @@ class Solution {
     List<Integer> itemM = new ArrayList<>();
     
     public List<String> readBinaryWatch(int num) {
+        //在hour有i个1，minute有num-i个1时，hour和minute的有哪些可能的数字
+        //如i=1, num-i=0,itemH=[8,4,2,1], itemM=[0]
         for(int i = 0; i <= num; i++) {
             dfs(i, 0, 0, hours, itemH);
             dfs(num-i, 0, 0, minutes, itemM);
-            
+            //将可能的数字组合成时间
             for(int item1: itemH) {
                 if(item1>=12) continue;
                 for(int item2: itemM) {
@@ -131,6 +133,7 @@ class Solution {
         
     }
     
+    //通过dfs，根据给定的二进制1的数量，获得所有可能的数字
     private void dfs(int count, int sum, int position, int[] array, List<Integer> item) {
         if(count == 0) {
             item.add(sum);

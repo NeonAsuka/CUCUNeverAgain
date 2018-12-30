@@ -41,6 +41,7 @@ class Solution {
     
     private void dfs(List<Integer> item, int[] nums, int position) {
         if(position == nums.length) {
+            //重要：在往List<List<T>>内添加List<T>的时候必须新建List<T>加入，否则只是修改List<List<T>>内的值
             res.add(new ArrayList<Integer>(item));
             return;
         }

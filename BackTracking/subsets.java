@@ -43,6 +43,7 @@ class Solution {
     
   //position或者i记录现在遍历到的nums数组中的位置，后续值只能取此为右边的值(比此值大的值)，以避免重复
     private void dfs(List<Integer> item, int[] nums, int position) {
+        //重要：在往List<List<T>>内添加List<T>的时候必须新建List<T>加入，否则只是修改List<List<T>>内的值
         res.add(new ArrayList<Integer>(item));
         for(int i=position; i<nums.length; i++) {
             int num = nums[i];

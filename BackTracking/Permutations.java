@@ -60,7 +60,7 @@ class Solution {
 
 
 /*
-求全组合的backtracking模板：
+求全排列的backtracking模板：
 
 //list s是已取出的数，nums是原始数组，pos是当前取第几个位置的数
 public void helper(List<Integer> s,int[] nums,int pos){

@@ -5,7 +5,7 @@
  * 这两种情况下，他们的模板是不同的。我们将分别讨论这两种情况。
  */
 
-// 全排列
+// 全排列：构建nums数组中所有元素的全排列，结果记录进List<List<Integer>> res中
 /* 
 DFS 做法, refer https://github.com/NeonAsuka/CUCUNeverAgain/blob/master/BackTracking/Permutations.java
 list s是待构建的答案，nums是原始数组，pos是当前取第几个位置的数
@@ -47,7 +47,7 @@ public void dfs(List<Integer> s,int[] nums,int pos){
 //TODO: BFS做法，非递归做法
 
 
-// 全组合
+// 全组合：构建nums数组中所有元素的全组合，结果记录进List<List<Integer>> res中
 /* 
 DFS递归： refer https://github.com/NeonAsuka/CUCUNeverAgain/blob/master/BackTracking/subsets.java
 求全组合相比于求全排列，应注意：

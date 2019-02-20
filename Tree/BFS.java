@@ -12,7 +12,7 @@ public int BFS(TreeNode root) {
     if(root == null) return 0;
     int depth = 1;     // 初始化一个depth，本题用depth记录深度
    
- >>>>>>>>>>>> 模板开始>>>>>>>>>>>>
+ >>>>>>>>>>>> 模板开始 >>>>>>>>>>>>
  
     // 初始化一个FIFO queue并将root入栈
     Queue<TreeNode> q = new LinkedList<TreeNode>();
